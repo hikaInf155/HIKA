@@ -2,7 +2,7 @@
 import csv
 import json
 import os
-os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
+#os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
 
 def fix_country_names(file_name):
     
@@ -15,6 +15,15 @@ def fix_country_names(file_name):
     #print(csv_list)
     for i in range(3,len(csv_list)):
         countries.append(csv_list[i][0])
+
+    #make names of data easier
+
+    if csv_list[3][2] == "CO2 emissions (metric tons per capita)":
+        csv_list[3][2] = "CO2"
+    if csv_list[3][2] == "Agriculture, value added (% of GDP)":
+        csv_list[3][2] = "Agriculture"
+    if csv_list[3][2] == "Incidence of tuberculosis (per 100,000 people)":
+        csv_list[3][2] = "Tuberculosis"
     
     #get rid of problems with countries that have commas in the name
     countries[22] = 'Bahamas, The'
@@ -101,6 +110,6 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     json_file = open("json_file.json","w")
     print(json_array, file=json_file)
     json_file.close()
-    return(csv_list1)
+    return(dict_list)
 
-
+make_json_file('co2_data.csv',"agr_data.csv","tuber_data.csv")

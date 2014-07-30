@@ -2,7 +2,7 @@
 import csv
 import json
 import os
-os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
+#os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
 
 def fix_country_names(file_name):
     
@@ -112,4 +112,4 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     json_file.close()
     return(dict_list)
 
-
+make_json_file('co2_data.csv',"agr_data.csv","tuber_data.csv")
