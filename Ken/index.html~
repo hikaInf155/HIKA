@@ -60,9 +60,9 @@ text {
 
 // Various accessors that specify the four dimensions of data to visualize.
 <!--function x(d) { return d.income; }-->
-function x(d) { return d.data; }
-function y(d) { return 50; }
-function radius(d) { return 10000000; }
+function x(d) { return d.data1; }
+function y(d) { return d.data2; }
+function radius(d) { return d.data3*100000; }
 function color(d) { return d.name; }
 function key(d) { return d.name; }
 
@@ -72,8 +72,8 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     height = 500 - margin.top - margin.bottom;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([0.1, 3000]).range([0, width]),
-    yScale = d3.scale.linear().domain([10, 85]).range([height, 0]),
+var xScale = d3.scale.log().domain([0.0001, 300]).range([0, width]),
+    yScale = d3.scale.linear().domain([0.02, 100]).range([height, 0]),
     radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40]),
     colorScale = d3.scale.category10();
 
@@ -225,7 +225,9 @@ d3.json("json_file.json", function(nations) {
         name: d.name,
         region: d.region,
         <!--income: interpolateValues(d.income, year),-->
-        data: interpolateValues(d.data, year),
+        data1: interpolateValues(d.CO2, year),
+        data2: interpolateValues(d.Agriculture, year), 
+        data3: interpolateValues(d.Tuberculosis, year),
       };
     });
   }
