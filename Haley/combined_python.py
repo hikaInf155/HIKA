@@ -1,8 +1,27 @@
 """This module changes our csv data into json format"""
+import urllib.request
+import re
 import csv
 import json
 import os
+
+
+
+
 os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
+
+def get_data(url):
+    data_name = re.findall('/indicator/[a-z][a-z]\.[a-z][a-z][a-z]',url)[0][-3:]
+
+    testfile = urllib.request.URLopener()
+    testfile.retrieve(url, data_name + "_data.xls")
+
+    import pandas as pd
+    xls = pd.ExcelFile(data_name + '_data.xls')
+    df = xls.parse(index_col=None, na_values=['NA'])
+    df.to_csv(data_name + '_data.csv')
+    return(data_name + '_data.csv')
+
 
 def fix_country_names(file_name):
     
@@ -119,4 +138,50 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     json_file.close()
     return(dict_list)
 
-make_json_file("atm_data.csv","dod_data.csv","gdp_data.csv")
+def take_user_variables(user_variable1, user_variable2, user_variable3):
+    national_debt = "http://api.worldbank.org/v2/en/indicator/gc.dod.totl.gd.zs?downloadformat=excel"
+    co2 = "http://api.worldbank.org/v2/en/indicator/en.atm.co2e.pc?downloadformat=excel"
+    agriculture_value_added = "http://api.worldbank.org/v2/en/indicator/nv.agr.totl.zs?downloadformat=excel"
+    tuberculosis = "http://api.worldbank.org/v2/en/indicator/sh.tbs.incd?downloadformat=excel"
+    GDP = "http://api.worldbank.org/v2/en/indicator/ny.gdp.mktp.cd?downloadformat=excel"
+
+#variable 1
+    if user_variable1 == "National Debt":
+        file1 = get_data(national_debt)
+    if user_variable1 == "Carbon Dioxide Emissions":
+        file1 = get_data(co2)
+    if user_variable1 == "Agricultural Value Added":
+        file1 = get_data(agriculture_value_added)
+    if user_variable1 == "Incidence of Tuberculosis":
+        file1 = get_data(tuberculosis)
+    if user_variable1 == "GDP":
+        file1 = get_data(GDP)
+
+#variable 2
+    if user_variable2 == "National Debt":
+        file2 = get_data(national_debt)
+    if user_variable2 == "Carbon Dioxide Emissions":
+        file2 = get_data(co2)
+    if user_variable2 == "Agricultural Value Added":
+        file2 = get_data(agriculture_value_added)
+    if user_variable2 == "Incidence of Tuberculosis":
+        file2 = get_data(tuberculosis)
+    if user_variable2 == "GDP":
+        file2 = get_data(GDP)
+
+#variable 3
+
+    if user_variable3 == "National Debt":
+        file3 = get_data(national_debt)
+    if user_variable3 == "Carbon Dioxide Emissions":
+        file3 = get_data(co2)
+    if user_variable3 == "Agricultural Value Added":
+        file3 = get_data(agriculture_value_added)
+    if user_variable3 == "Incidence of Tuberculosis":
+        file3 = get_data(tuberculosis)
+    if user_variable3 == "GDP":
+        file3 = get_data(GDP)
+
+    make_json_file(file1, file2, file3)
+
+take_user_variables("National Debt","Incidence of Tuberculosis","GDP")
