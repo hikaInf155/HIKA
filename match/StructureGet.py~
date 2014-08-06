@@ -1,6 +1,5 @@
 def StrGet(inp):
     if isinstance(inp,(set,dict,list)):
-        
         return 'Set'
     else:
         try:
@@ -18,3 +17,5 @@ print(StrGet('23'))
 for key, value in a.items():
     print(key)
 
+a={1,2,3}
+print(list(a)[1])
