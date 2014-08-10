@@ -4,7 +4,7 @@
 <title>Our Visualization</title>
 <style>
 
-@import url(css.py?style.css);
+@import url(style.css);
 
 #chart {
   margin-left: -40px;
@@ -50,7 +50,7 @@ text {
 
 <p id="chart"></p>
 
-<script src="d3/d3.min.js"></script>
+<script src="../d3/d3.min.js"></script>
 <script>
 
 // Various accessors that specify the four dimensions of data to visualize.
@@ -123,7 +123,7 @@ var label = svg.append("text")
 <!--d3.json("nations.json", function(nations) {-->
 <!--d3.json("json_file.json", function(nations) {-->
 <!--d3.json("j.json", function(nations) {-->
-d3.json("json.py?file=j.json", function(nations) {
+d3.json("../cgi-bin/json.py?file=j.json", function(nations) {
 
   // A bisector since many nation's data is sparsely-defined.
   var bisect = d3.bisector(function(d) { return d[0]; });
