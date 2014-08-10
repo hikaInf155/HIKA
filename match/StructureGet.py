@@ -1,7 +1,10 @@
 def StrGet(inp):
     if isinstance(inp,(set,dict,list)):
-        
-        return 'Set'
+        ans=set()
+        for key in inp:
+            ans.add(StrGet(key))
+        #return 'Set'
+        return ans
     else:
         try:
             a=float(inp)
@@ -9,12 +12,12 @@ def StrGet(inp):
         except ValueError:
             return 'String'
 
-a={'hello':'3',
-    'aa':4,
-    'ab':[1,2,3]}
+#a={'hello':'3',
+    #'aa':4,
+    #'ab':[1,2,3]}
+a=['12','r43',12]
 print(StrGet(a))
-print(StrGet('f23'))
-print(StrGet('23'))
-for key, value in a.items():
-    print(key)
-
+#print(StrGet('f23'))
+#print(StrGet('23'))
+#for key, value in a.items():
+    #print(key)

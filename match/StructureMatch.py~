@@ -19,7 +19,7 @@ def StructureMatch(user,design):
         for iU in user:
             #print('====')
             #print([user[iU],design[iD]])
-            [DU[iD][iU],matchDU[iD][iU],]=StructureMatch(user[iU],design[iD])
+            [DU[iD][iU],matchDU[iD][iU]]=StructureMatch(user[iU],design[iD])
             DU[iD][iU]+=TypeMatch.TypeMatch(iU,iD)
 
     #print(DU)
