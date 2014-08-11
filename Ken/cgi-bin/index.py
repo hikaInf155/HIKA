@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
  
-print "Content-type: text/html"
-f=open("index.html",'r')
+print("Content-type: text/html")
+f=open("cgi-bin/index.html",'r')
 for i in f:
     print(i)
