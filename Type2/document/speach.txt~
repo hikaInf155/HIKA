@@ -1,0 +1,3 @@
+First part: I wrote a javascript program to visualize the data. First, the program reads the data cleaned in the step before. Then I used the D3 library adding svg element to web page whose format is controlled in a style.css file. 
+
+Second part: Nowadays, actually there are so many excellent types of chart designed. Not too few, but too many for users to select. We want to make this step easier. I then designed an algorithm using DFS, depth-first search, that grades the data from the user to a specific chart. So we can rank different types, then find the most suitable one. This function will not show up in our prototype, but will be used once we try to expand our project to generate different kinds of visualizations.
