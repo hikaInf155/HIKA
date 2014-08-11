@@ -4,14 +4,12 @@ import re
 import csv
 import json
 import os
-
-
-
+from collections import OrderedDict
 
 os.chdir("C://Users//HaleyPC//Documents//HIKA//Haley")
 
 def get_data(url):
-    data_name = re.findall('/indicator/[a-z][a-z]\.[a-z][a-z][a-z]',url)[0][-3:]
+    data_name = re.findall('/indicator/[a-z][a-z]\.[a-z][a-z][a-z]\.[a-z][a-z][a-z][a-z]',url)[0][-7:]
 
     testfile = urllib.request.URLopener()
     testfile.retrieve(url, data_name + "_data.xls")
@@ -40,16 +38,20 @@ def fix_country_names(file_name):
         countries.append(csv_list[i][0])
     #make names of data easier
 
-    if file_name == "atm_data.csv":
+    if file_name == "atm.co2e_data.csv":
         csv_list[3][2] = "CO2"
-    if file_name == "agr_data.csv":
+    if file_name == "agr.totl_data.csv":
         csv_list[3][2] = "Agriculture"
-    if file_name == "tbs_data.csv":
+    if file_name == "tbs.incd_data.csv":
         csv_list[3][2] = "Tuberculosis"
-    if file_name == "gdp_data.csv":
+    if file_name == "gdp.mktp_data.csv":
         csv_list[3][2] = "GDP"
-    if file_name == "dod_data.csv":
+    if file_name == "dod.totl_data.csv":
         csv_list[3][2] = "National Debt"
+    if file_name == "dyn.cbrt_data.csv":
+        csv_list[3][2] = "Birth Rate"
+    if file_name == "dyn.le00_data.csv":
+        csv_list[3][2] = "Life Expectancy"
     
     #get rid of problems with countries that have commas in the name
     countries[22] = 'Bahamas, The'
@@ -117,7 +119,7 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     csv_list2 = fix_country_names(csv_file2)[0]
     csv_list3 = fix_country_names(csv_file3)[0]
     countries = fix_country_names(csv_file1)[1]
-    print(countries)
+    # print(countries)
     dates = get_dates(csv_list1)
 
 
@@ -125,6 +127,7 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     for country in countries:
         #make an empty dictionary titled "country_dict"
         country_dict = {}
+
         country_dict[csv_list1[3][2]] = combine_data_and_dates(countries, country, csv_list1, dates)
         country_dict[csv_list2[3][2]] = combine_data_and_dates(countries, country, csv_list2, dates)
         country_dict[csv_list3[3][2]] = combine_data_and_dates(countries, country, csv_list3, dates)
@@ -138,50 +141,40 @@ def make_json_file(csv_file1,csv_file2,csv_file3):
     json_file.close()
     return(dict_list)
 
-def take_user_variables(user_variable1, user_variable2, user_variable3):
+def convert_user_variables(user_variable):
     national_debt = "http://api.worldbank.org/v2/en/indicator/gc.dod.totl.gd.zs?downloadformat=excel"
     co2 = "http://api.worldbank.org/v2/en/indicator/en.atm.co2e.pc?downloadformat=excel"
     agriculture_value_added = "http://api.worldbank.org/v2/en/indicator/nv.agr.totl.zs?downloadformat=excel"
     tuberculosis = "http://api.worldbank.org/v2/en/indicator/sh.tbs.incd?downloadformat=excel"
     GDP = "http://api.worldbank.org/v2/en/indicator/ny.gdp.mktp.cd?downloadformat=excel"
+    birth_rate = "http://api.worldbank.org/v2/en/indicator/sp.dyn.cbrt.in?downloadformat=excel"
+    life_expectancy = "http://api.worldbank.org/v2/en/indicator/sp.dyn.le00.in?downloadformat=excel"
 
-#variable 1
-    if user_variable1 == "National Debt":
-        file1 = get_data(national_debt)
-    if user_variable1 == "Carbon Dioxide Emissions":
-        file1 = get_data(co2)
-    if user_variable1 == "Agricultural Value Added":
-        file1 = get_data(agriculture_value_added)
-    if user_variable1 == "Incidence of Tuberculosis":
-        file1 = get_data(tuberculosis)
-    if user_variable1 == "GDP":
-        file1 = get_data(GDP)
+    if user_variable == "National Debt":
+        variable_file = get_data(national_debt)
+    if user_variable == "Carbon Dioxide Emissions":
+        variable_file = get_data(co2)
+    if user_variable == "Agricultural Value Added":
+        variable_file = get_data(agriculture_value_added)
+    if user_variable == "Incidence of Tuberculosis":
+        variable_file = get_data(tuberculosis)
+    if user_variable == "GDP":
+        variable_file = get_data(GDP)
+    if user_variable ==  "Birth Rate":
+        variable_file = get_data(birth_rate)
+    if user_variable == "Life Expectancy":
+        variable_file == get_data(life_expectancy)
+    return(variable_file)
 
-#variable 2
-    if user_variable2 == "National Debt":
-        file2 = get_data(national_debt)
-    if user_variable2 == "Carbon Dioxide Emissions":
-        file2 = get_data(co2)
-    if user_variable2 == "Agricultural Value Added":
-        file2 = get_data(agriculture_value_added)
-    if user_variable2 == "Incidence of Tuberculosis":
-        file2 = get_data(tuberculosis)
-    if user_variable2 == "GDP":
-        file2 = get_data(GDP)
 
-#variable 3
-
-    if user_variable3 == "National Debt":
-        file3 = get_data(national_debt)
-    if user_variable3 == "Carbon Dioxide Emissions":
-        file3 = get_data(co2)
-    if user_variable3 == "Agricultural Value Added":
-        file3 = get_data(agriculture_value_added)
-    if user_variable3 == "Incidence of Tuberculosis":
-        file3 = get_data(tuberculosis)
-    if user_variable3 == "GDP":
-        file3 = get_data(GDP)
-
+def take_user_variables(variable1, variable2, variable3):
+    file1 = convert_user_variables(variable1)
+    file2 = convert_user_variables(variable2)
+    file3 = convert_user_variables(variable3)
     make_json_file(file1, file2, file3)
 
-take_user_variables("National Debt","Incidence of Tuberculosis","GDP")
+v1 = form.getvalue('v1')
+v2 = form.getvalue('v2')
+v3 = form.getvalue('v3')
+
+take_user_variables(v1, v2, v3)
