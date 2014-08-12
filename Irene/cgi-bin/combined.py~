@@ -203,7 +203,9 @@ print("<body>")
 print("<h2>selected variable one is "+v1+"</h2>")
 print("<h2>selected variable one is "+v2+"</h2>")
 print("<h2>selected variable one is "+v3+"</h2>")
+
+take_user_variables(v1, v2, v3)
+
 print("</body>")
 print("</html>")
 
-take_user_variables(v1, v2, v3)
