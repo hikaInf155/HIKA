@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+print  ("Content-type:text/html")
+print ('''
+<html>
+	<head>
+		<title>Data Visualization</title>
+	</head>
+	<h1>Data Visualization by HIKA</h1>
+	<form action="/cgi-bin/result.py" method="post" taregt="_bank">
+	<select name="dropdown">
+		<option value="Maths" selected>Maths</option>
+		<option value="Physics">Physics</option>
+	</select>
+	<input type="submit" value="Submit"/>
+	</form>
+</html>
+''')
+
+

@@ -1,0 +1,35 @@
+import SM
+import re
+import json
+import os
+
+
+def control(exp_path):
+    os.system('copy ..\json_file.json '+exp_path)
+    user_json= json.loads(open(exp_path+'/json_file.json').read())
+    exp_json= json.loads(open(exp_path+'/j.json').read()) #example json file
+
+    user_struct=SM.BuildStructure(user_json)
+    #__SearchTree(a)
+    exp_struct=SM.BuildStructure(exp_json)
+    SM.StructureMatch(user_struct,exp_struct)
+    #output grade===== print(b.grade)
+    #print(SM.SearchTree(b))
+    dic=SM.SearchTree(exp_struct)
+    print(dic)
+    dic["j.json"]="json_file.json"
+    
+    exp_file=open(exp_path+'/example.html','r')
+    out_file=open(exp_path+'/out.html','w')
+    for i in exp_file:
+        tmp=i
+        for key in dic:
+            tmp=re.sub('"'+key+'"','"'+dic[key]+'"',tmp)
+            #print(tmp)
+        print(tmp,end='',file=out_file)
+    out_file.close()
+    exp_file.close()
+
+control('type1')
+
+

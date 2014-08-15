@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+print  ("Content-type:text/html")
+print ('''
+<html>
+	<head>
+		<title>Data Visualization</title>
+	</head>
+	<h1>Data Visualization by HIKA</h1>
+	<form action="/cgi-bin/combined.py" method="post" target="_bank">
+	<select name="v1">
+		<option value="National Debt" selected>National Debt</option>
+		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Agricultural Value Added">Agricultural Value Added</option>
+		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
+		<option value="GDP">GDP</option>
+		<option value="Birth Rate">Birth Rate</option>
+		<option value="Life Expectancy">Life Expectancy</option>
+	</select>
+	<select name="v2">
+		<option value="National Debt" selected>National Debt</option>
+		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Agricultural Value Added">Agricultural Value Added</option>
+		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
+		<option value="GDP">GDP</option>
+		<option value="Birth Rate">Birth Rate</option>
+		<option value="Life Expectancy">Life Expectancy</option>
+	</select>
+	<select name="v3">
+		<option value="National Debt" selected>National Debt</option>
+		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Agricultural Value Added">Agricultural Value Added</option>
+		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
+		<option value="GDP">GDP</option>
+		<option value="Birth Rate">Birth Rate</option>
+		<option value="Life Expectancy">Life Expectancy</option>
+	</select>
+	<input type="submit" value="Submit"/>
+	</form>
+</html>
+''')
