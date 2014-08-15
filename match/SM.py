@@ -49,11 +49,15 @@ def __TypeCompare(a,b):
 
 def StructureMatch(user,design):
     #if (not user.child)or(not design.child):
+    print('<Str>',user.key," ",design.key)
     len_user_child=len(user.child)
     len_design_child=len(design.child)
     if (len_design_child>len_user_child)or(len_user_child==0):
+        print("=exit")
         design.match=user.key
         design.grade=__TypeCompare(user,design)
+        print('l de ',len_design_child,' l us ',len_user_child)
+        print("design G",design.grade), '</Str>'
         return design
         
     len_user_child=len(user.child)
@@ -61,25 +65,36 @@ def StructureMatch(user,design):
     grade_between_UD=[copy.deepcopy(design.child) for i in range(len(user.child))]
     for i in range(len_design_child):
         for j in range(len_user_child):
-            grade_between_UD[j][i]=StructureMatch(user.child[j],grade_between_UD[j][i])
+            #grade_between_UD[j][i]=StructureMatch(user.child[j],grade_between_UD[j][i])
+            StructureMatch(user.child[j],grade_between_UD[j][i])
+
+    #for i in range(len_design_child):
+        #for j in range(len_user_child):
+            #print(grade_between_UD[j][i].grade,end=' ')
+        #print()
 
     
     tmp = itertools.permutations(range(len_user_child), len_design_child)
     maxS=-10;
     best=[]
     for i in tmp:
-        s=sum([grade_between_UD[u][d].grade for d in range(len_design_child) for u in i])
-        print([s,maxS])
+        list_i=list(i)
+        s=sum([grade_between_UD[list_i[d]][d].grade for d in range(len_design_child)])
+        print('s,maxS:',[s,maxS])
+        print('tmp[i]',i)
         if s>maxS:
             maxS=s
             best=i
-    print(best)
+    print('best:',best)
     for d in range(len_design_child):
-        print('d ',d)
-        design.child[d].grade=grade_between_UD[best[d]][d].grade
-        design.child[d].match=grade_between_UD[best[d]][d].match
+        #print('d ',d)
+        #design.child[d].grade=grade_between_UD[best[d]][d].grade
+        #design.child[d].match=grade_between_UD[best[d]][d].match
+        design.child[d]=grade_between_UD[best[d]][d]
     design.grade=maxS+__TypeCompare(user,design)
     design.match=user.key
+    __SearchTree(design)
+    print("design.grade",design.grade,'design.match',design.match,'</Str>')
     return design
 
 def BuildStructure(inp):
@@ -101,7 +116,7 @@ def BuildStructure(inp):
     return ans
 
 def __SearchTree(inp):
-    print(inp.key,'-',inp.match,' ',inp.key)
+    print(inp.key,'-',inp.match,' Type ',inp.type_of_data)
     if inp.child:
         print("===")
         #print(inp.child)
@@ -110,9 +125,14 @@ def __SearchTree(inp):
             __SearchTree(inp.child[i])
             #print(type(inp.child[i]))
 
-f= json.loads(open('f.json').read())
+#f= json.loads(open('f.json').read()) 
+#g= json.loads(open('g.json').read())
+f= json.loads(open('j.json').read()) 
+g= json.loads(open('data.json').read())
+
 a=BuildStructure(f)
-g= json.loads(open('g.json').read())
+#__SearchTree(a)
+print("========b")
 b=BuildStructure(g)
 StructureMatch(a,b)
 print(b.grade)
