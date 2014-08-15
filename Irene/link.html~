@@ -1,0 +1,11 @@
+<html>
+	<head>
+		<title>Data Visualization</title>
+	</head>
+  <body>
+      <a href="cgi-bin/type1/out.html">type1</a>
+      <br>
+      <a href="cgi-bin/type2/out.html">type2</a>
+  </body>
+</html>
+

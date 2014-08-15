@@ -5,10 +5,11 @@ import os
 
 
 def control(exp_path):
-    #os.system('copy ..\json_file.json '+exp_path)
-    os.system('cp ../json_file '+exp_path)
-    user_json= json.loads(open(exp_path+'/json_file.json').read())
-    exp_json= json.loads(open(exp_path+'/j.json').read()) #example json file
+    #os.system('copy ..\json_file.json '+path)
+    path='cgi-bin/'+exp_path
+    os.system('cp json_file.json '+path)
+    user_json= json.loads(open(path+'/json_file.json').read())
+    exp_json= json.loads(open(path+'/j.json').read()) #example json file
 
     user_struct=SM.BuildStructure(user_json)
     #__SearchTree(a)
@@ -20,8 +21,8 @@ def control(exp_path):
     print(dic)
     dic["j.json"]="json_file.json"
     
-    exp_file=open(exp_path+'/example.html','r')
-    out_file=open(exp_path+'/out.html','w')
+    exp_file=open(path+'/example.html','r')
+    out_file=open(path+'/out.html','w')
     for i in exp_file:
         tmp=i
         for key in dic:
@@ -31,6 +32,6 @@ def control(exp_path):
     out_file.close()
     exp_file.close()
 
-control('type1')
-
-
+#with open('log','w') as fi:
+    #print(os.getcwd(),file=fi)
+#control('type2')

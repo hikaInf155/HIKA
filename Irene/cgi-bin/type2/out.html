@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    </head>
+    <body>
+
+<style>
+
+
+#chart {
+  margin-left: -40px;
+  height: 506px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.label {
+  fill: #777;
+}
+
+.year.label {
+  font: 500 196px "Helvetica Neue";
+  fill: #ddd;
+}
+
+.year.label.active {
+  fill: #aaa;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+  cursor: ew-resize;
+}
+
+</style>
+        <script>
+            $.getJSON("json_file.json", function(jsonCircles) {
+
+var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
+    width = 960 - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+
+var xScale = d3.scale.linear().domain([1955, 2015]).range([0, width]),
+    yScale = d3.scale.linear().domain([0.01, 100]).range([height, 0]),
+    radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40]),
+    colorScale = d3.scale.category10();
+
+var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(12, d3.format(",d")),
+    yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+
+var svgContainer = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            function dataToDraw(d,j){
+            this.x=xScale(d["Birth rate, crude (per 1,000 people)"][j][0]);
+            this.y=yScale(d["Birth rate, crude (per 1,000 people)"][j][1]);
+            this.color=d["name"];
+            }
+
+
+// Add the x-axis.
+svgContainer.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+// Add the y-axis.
+svgContainer.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+
+// Add an x-axis label.
+svgContainer.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 6)
+    .text("Year");
+
+// Add a y-axis label.
+svgContainer.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Data 2");
+            var dat=[];
+            for (i=0;i<jsonCircles.length;i++){
+                for (j=0; j<jsonCircles[i]["Birth rate, crude (per 1,000 people)"].length;j++){
+                v=new dataToDraw(jsonCircles[i],j);
+                dat.push(v);
+                }
+            }
+                <!--d3.select("body").append("p").text(dat[0].color);-->
+            <!--var svgContainer = d3.select("body").append("svg")-->
+            <!--.attr("width", 200)-->
+            <!--.attr("height", 200);-->
+
+            var circles = svgContainer.selectAll("circle")
+                .data(dat)
+                .enter()
+                .append("circle");
+            var circleAttributes = circles
+            .attr("cx", function(d) {return d.x;})
+                .attr("cy", function (d) { return d.y; })
+                .attr("r", function (d) { return 3; })
+                .style("fill", function(d) { return colorScale(d.color);});
+
+
+            });
+        </script>
+    </body>
+</html>

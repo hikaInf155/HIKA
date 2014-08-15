@@ -10,7 +10,7 @@ print ('''
 	<form action="/cgi-bin/combined.py" method="post" target="_bank">
 	<select name="v1">
 		<option value="National Debt" selected>National Debt</option>
-		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>
 		<option value="Agricultural Value Added">Agricultural Value Added</option>
 		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
 		<option value="GDP">GDP</option>
@@ -19,7 +19,7 @@ print ('''
 	</select>
 	<select name="v2">
 		<option value="National Debt" selected>National Debt</option>
-		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>
 		<option value="Agricultural Value Added">Agricultural Value Added</option>
 		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
 		<option value="GDP">GDP</option>
@@ -28,7 +28,7 @@ print ('''
 	</select>
 	<select name="v3">
 		<option value="National Debt" selected>National Debt</option>
-		<!--<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>-->
+		<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>
 		<option value="Agricultural Value Added">Agricultural Value Added</option>
 		<option value="Incidence of Tuberculosis">Incidence of Tuberculosis</option>
 		<option value="GDP">GDP</option>
