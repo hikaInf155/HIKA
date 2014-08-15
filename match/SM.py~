@@ -49,15 +49,15 @@ def __TypeCompare(a,b):
 
 def StructureMatch(user,design):
     #if (not user.child)or(not design.child):
-    print('<Str>',user.key," ",design.key)
+    #print('<Str>',user.key," ",design.key)
     len_user_child=len(user.child)
     len_design_child=len(design.child)
     if (len_design_child>len_user_child)or(len_user_child==0):
-        print("=exit")
+        #print("=exit")
         design.match=user.key
         design.grade=__TypeCompare(user,design)
-        print('l de ',len_design_child,' l us ',len_user_child)
-        print("design G",design.grade), '</Str>'
+        #print('l de ',len_design_child,' l us ',len_user_child)
+        #print("design G",design.grade), '</Str>'
         return design
         
     len_user_child=len(user.child)
@@ -80,12 +80,12 @@ def StructureMatch(user,design):
     for i in tmp:
         list_i=list(i)
         s=sum([grade_between_UD[list_i[d]][d].grade for d in range(len_design_child)])
-        print('s,maxS:',[s,maxS])
-        print('tmp[i]',i)
+        #print('s,maxS:',[s,maxS])
+        #print('tmp[i]',i)
         if s>maxS:
             maxS=s
             best=i
-    print('best:',best)
+    #print('best:',best)
     for d in range(len_design_child):
         #print('d ',d)
         #design.child[d].grade=grade_between_UD[best[d]][d].grade
@@ -93,8 +93,8 @@ def StructureMatch(user,design):
         design.child[d]=grade_between_UD[best[d]][d]
     design.grade=maxS+__TypeCompare(user,design)
     design.match=user.key
-    __SearchTree(design)
-    print("design.grade",design.grade,'design.match',design.match,'</Str>')
+    #__SearchTree(design)
+    #print("design.grade",design.grade,'design.match',design.match,'</Str>')
     return design
 
 def BuildStructure(inp):
@@ -115,28 +115,27 @@ def BuildStructure(inp):
         ans=TypeNode('Number')
     return ans
 
-def __SearchTree(inp):
-    print(inp.key,'-',inp.match,' Type ',inp.type_of_data)
+def SearchTree(inp,ans={}):
+    if (inp.key) and (inp.match):
+        print(inp.key,'-',inp.match,' Type ',inp.type_of_data)
+        ans[inp.key]=inp.match
     if inp.child:
-        print("===")
+        #print("===")
         #print(inp.child)
         #print(type(inp.child))
         for i in range(len(inp.child)):
-            __SearchTree(inp.child[i])
+            SearchTree(inp.child[i],ans)
             #print(type(inp.child[i]))
+    return ans
 
 #f= json.loads(open('f.json').read()) 
 #g= json.loads(open('g.json').read())
-f= json.loads(open('j.json').read()) 
-g= json.loads(open('data.json').read())
 
-a=BuildStructure(f)
-#__SearchTree(a)
-print("========b")
-b=BuildStructure(g)
-StructureMatch(a,b)
-print(b.grade)
-__SearchTree(b)
+#a=BuildStructure(f)
+#b=BuildStructure(g)
+#StructureMatch(a,b)
+#print(b.grade)
+#print(SearchTree(b))
 
 #print(a.type_of_data)
 #print([a.child[i].key for i in range(len(a.child))])
