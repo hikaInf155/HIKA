@@ -31,6 +31,7 @@ def control(exp_path):
         print(tmp,end='',file=out_file)
     out_file.close()
     exp_file.close()
+    return exp_struct.grade
 
 #with open('log','w') as fi:
     #print(os.getcwd(),file=fi)

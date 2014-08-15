@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title>Type 2</title>
 <html>
     <head>
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -48,8 +49,9 @@ text {
 }
 
 </style>
+<h1>Type 2</h1>
         <script>
-            $.getJSON('j.json', function(jsonCircles) {
+            $.getJSON("j.json", function(jsonCircles) {
 
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     width = 960 - margin.right,
@@ -103,7 +105,7 @@ svgContainer.append("text")
     .attr("y", 6)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("Data 2");
+    .text("CO2");
             var dat=[];
             for (i=0;i<jsonCircles.length;i++){
                 for (j=0; j<jsonCircles[i]["CO2"].length;j++){
