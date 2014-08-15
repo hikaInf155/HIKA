@@ -165,7 +165,7 @@ def convert_user_variables(user_variable):
         variable_file = get_data(birth_rate)
     if user_variable == "Life Expectancy":
         variable_file == get_data(life_expectancy)
-    return(variable_file)
+    return variable_file
 
 
 def take_user_variables(variable1, variable2, variable3):
@@ -191,6 +191,7 @@ if form.getvalue('v3'):
 else:
   v3= "Not entered"
 
+take_user_variables(v1, v2, v3)
 
 print ("Content-type:text/html")
 print ('''
@@ -203,9 +204,5 @@ print("<body>")
 print("<h2>selected variable one is "+v1+"</h2>")
 print("<h2>selected variable one is "+v2+"</h2>")
 print("<h2>selected variable one is "+v3+"</h2>")
-
-take_user_variables(v1, v2, v3)
-
 print("</body>")
 print("</html>")
-

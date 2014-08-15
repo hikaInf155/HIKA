@@ -7,7 +7,7 @@ print ('''
 		<title>Data Visualization</title>
 	</head>
 	<h1>Data Visualization by HIKA</h1>
-	<form action="/cgi-bin/result.py" method="post" target="_bank">
+	<form action="/cgi-bin/combined.py" method="post" target="_bank">
 	<select name="v1">
 		<option value="National Debt" selected>National Debt</option>
 		<option value="Carbon Dioxide Emission">Carbon Dioxide Emission</option>

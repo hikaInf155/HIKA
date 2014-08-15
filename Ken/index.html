@@ -222,9 +222,9 @@ d3.json("j.json", function(nations) {
         name: d.name,
         region: d.region,
         <!--income: interpolateValues(d.income, year),-->
-        data1: interpolateValues(d.CO2, year),
-        data2: interpolateValues(d.Agriculture, year), 
-        data3: interpolateValues(d.Tuberculosis, year),
+        data1: interpolateValues(d["CO2"], year),
+        data2: interpolateValues(d["Agriculture"], year), 
+        data3: interpolateValues(d["Tuberculosis"], year),
       };
     });
   }

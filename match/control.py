@@ -23,5 +23,3 @@ for i in exp_file:
     print(tmp,end='',file=out_file)
 out_file.close()
 exp_file.close()
-
-
